@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 import flet as ft
@@ -191,37 +192,120 @@ EXERCISE_SVGS = {
         <rect x="64" y="64" width="16" height="7" rx="3" fill="#FFFFFF"/>
         <rect x="180" y="64" width="16" height="7" rx="3" fill="#FFFFFF"/>
     </svg>""",
+    "pullup": """<svg viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg">
+        <rect width="260" height="140" rx="16" fill="#050507"/>
+        <line x1="60" y1="22" x2="200" y2="22" stroke="#3F3F46" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="130" cy="48" r="9" fill="#FFFFFF"/>
+        <line x1="130" y1="60" x2="130" y2="102" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/>
+        <polyline points="122,64 102,44 102,22" fill="none" stroke="#A1A1AA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="138,64 158,44 158,22" fill="none" stroke="#A1A1AA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="125" y1="102" x2="120" y2="126" stroke="#71717A" stroke-width="6" stroke-linecap="round"/>
+        <line x1="135" y1="102" x2="140" y2="126" stroke="#71717A" stroke-width="6" stroke-linecap="round"/>
+    </svg>""",
+    "cable_cross": """<svg viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg">
+        <rect width="260" height="140" rx="16" fill="#050507"/>
+        <line x1="45" y1="16" x2="45" y2="124" stroke="#27272A" stroke-width="6"/>
+        <line x1="215" y1="16" x2="215" y2="124" stroke="#27272A" stroke-width="6"/>
+        <line x1="45" y1="18" x2="215" y2="18" stroke="#27272A" stroke-width="5"/>
+        <line x1="48" y1="24" x2="108" y2="82" stroke="#71717A" stroke-width="2.5" stroke-dasharray="3,3"/>
+        <line x1="212" y1="24" x2="152" y2="82" stroke="#71717A" stroke-width="2.5" stroke-dasharray="3,3"/>
+        <circle cx="130" cy="48" r="9" fill="#FFFFFF"/>
+        <line x1="130" y1="60" x2="130" y2="112" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/>
+        <path d="M 124 66 Q 112 80 112 84" fill="none" stroke="#A1A1AA" stroke-width="6" stroke-linecap="round"/>
+        <path d="M 136 66 Q 148 80 148 84" fill="none" stroke="#A1A1AA" stroke-width="6" stroke-linecap="round"/>
+    </svg>""",
+    "t_bar": """<svg viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg">
+        <rect width="260" height="140" rx="16" fill="#050507"/>
+        <line x1="50" y1="118" x2="165" y2="68" stroke="#52525B" stroke-width="6" stroke-linecap="round"/>
+        <rect x="148" y="52" width="14" height="30" rx="4" transform="rotate(-24 155 67)" fill="#FFFFFF"/>
+        <circle cx="152" cy="40" r="9" fill="#FFFFFF"/>
+        <line x1="144" y1="50" x2="112" y2="80" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+        <line x1="112" y1="80" x2="105" y2="118" stroke="#A1A1AA" stroke-width="7" stroke-linecap="round"/>
+        <line x1="136" y1="58" x2="150" y2="74" stroke="#A1A1AA" stroke-width="6" stroke-linecap="round"/>
+    </svg>""",
+    "bb_curl": """<svg viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg">
+        <rect width="260" height="140" rx="16" fill="#050507"/>
+        <circle cx="130" cy="38" r="10" fill="#FFFFFF"/>
+        <line x1="130" y1="52" x2="130" y2="114" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round"/>
+        <path d="M 100 68 Q 130 78 160 68" fill="none" stroke="#A1A1AA" stroke-width="6" stroke-linecap="round"/>
+        <line x1="82" y1="68" x2="178" y2="68" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+        <rect x="86" y="56" width="8" height="24" rx="3" fill="#FFFFFF"/>
+        <rect x="166" y="56" width="8" height="24" rx="3" fill="#FFFFFF"/>
+    </svg>""",
+    "hack_squat": """<svg viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg">
+        <rect width="260" height="140" rx="16" fill="#050507"/>
+        <line x1="75" y1="25" x2="185" y2="118" stroke="#27272A" stroke-width="8" stroke-linecap="round"/>
+        <line x1="155" y1="118" x2="195" y2="95" stroke="#3F3F46" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="105" cy="44" r="9" fill="#FFFFFF"/>
+        <line x1="112" y1="54" x2="142" y2="80" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+        <polyline points="142,80 132,100 165,108" fill="none" stroke="#A1A1AA" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>""",
+    "leg_raise": """<svg viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg">
+        <rect width="260" height="140" rx="16" fill="#050507"/>
+        <line x1="95" y1="18" x2="95" y2="124" stroke="#27272A" stroke-width="7"/>
+        <line x1="95" y1="58" x2="135" y2="58" stroke="#3F3F46" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="114" cy="36" r="9" fill="#FFFFFF"/>
+        <line x1="112" y1="48" x2="112" y2="84" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+        <line x1="112" y1="84" x2="168" y2="84" stroke="#A1A1AA" stroke-width="8" stroke-linecap="round"/>
+    </svg>""",
 }
 
-# Полный каталог упражнений и тренажеров по категориям
+# Полный каталог, разбитый по 6 группам мышц + популярные тренажеры
 EXERCISE_CATALOG = [
     {
-        "category": "Грузоблочные тренажеры",
+        "category": "Грудь",
         "items": [
-            {"name": "Верхняя тяга", "svg": "lat", "tip": "Тяните рукоять к верху груди, сводя и опуская лопатки.", "default_w": "60"},
-            {"name": "Горизонтальная тяга блока", "svg": "row", "tip": "Держите спину прямой, тяните рукоять к поясу.", "default_w": "55"},
-            {"name": "Жим от груди в тренажере сидя", "svg": "chest_machine", "tip": "Прижмите лопатки к спинке, выжимайте рукояти плавно без рывков.", "default_w": "50"},
+            {"name": "Жим лежа", "svg": "bench", "tip": "Лопатки сведены, жесткий упор ногами, опускайте гриф на низ груди.", "default_w": "70"},
+            {"name": "Жим гантелями на наклонной скамье", "svg": "incline_db", "tip": "Угол скамьи 30°, опускайте гантели глубоко вдоль линии ключиц.", "default_w": "24"},
+            {"name": "Жим от груди в тренажере сидя", "svg": "chest_machine", "tip": "Прижмите лопатки к спинке, выжимайте рукояти плавно без рывков.", "default_w": "55"},
             {"name": "Тренажер «Бабочка» (Пек-дек)", "svg": "fly", "tip": "Локти чуть согнуты, сводите руки перед грудью с паузой 1 сек.", "default_w": "45"},
-            {"name": "Разгибание ног сидя", "svg": "leg_ext", "tip": "Плавно разгибайте колени до пикового сокращения квадрицепса.", "default_w": "50"},
-            {"name": "Сгибание ног сидя / лежа", "svg": "leg_curl", "tip": "Прижимайте таз к скамье, сгибайте голень без отрыва бедер.", "default_w": "40"},
+            {"name": "Сведение рук в кроссовере", "svg": "cable_cross", "tip": "Корпус чуть наклонен вперед, сводите рукояти по дуге перед грудью.", "default_w": "20"},
+            {"name": "Отжимание на брусьях в тренажере", "svg": "dips", "tip": "Опускайтесь до прямого угла в локтях, слегка наклоняя корпус вперед.", "default_w": "40"},
         ],
     },
     {
-        "category": "Тренажеры со свободными весами и рамы",
+        "category": "Спина",
+        "items": [
+            {"name": "Верхняя тяга", "svg": "lat", "tip": "Тяните рукоять к верху груди, сводя и опуская лопатки.", "default_w": "60"},
+            {"name": "Горизонтальная тяга блока", "svg": "row", "tip": "Держите спину прямой, тяните рукоять к поясу, сводя лопатки.", "default_w": "55"},
+            {"name": "Подтягивания / Гравитрон", "svg": "pullup", "tip": "Тянитесь грудью к перекладине без рывков и раскачки корпуса.", "default_w": "0"},
+            {"name": "Тяга Т-грифа в упоре", "svg": "t_bar", "tip": "Плотно прижмите грудь к подушке, тяните рукояти локтями назад.", "default_w": "45"},
+            {"name": "Гиперэкстензия", "svg": "hyper", "tip": "Поднимайте корпус до прямой линии с ногами без переразгибания поясницы.", "default_w": "10"},
+        ],
+    },
+    {
+        "category": "Ноги",
         "items": [
             {"name": "Жим ногами", "svg": "leg_press", "tip": "Не отрывайте поясницу от спинки и не выпрямляйте колени до щелчка.", "default_w": "120"},
-            {"name": "Машина Смита", "svg": "smith", "tip": "Контролируйте траекторию грифа, держите кор в жестком тонусе.", "default_w": "60"},
-            {"name": "Гиперэкстензия", "svg": "hyper", "tip": "Поднимайте корпус до прямой линии с ногами без переразгибания.", "default_w": "10"},
+            {"name": "Гакк-приседания в тренажере", "svg": "hack_squat", "tip": "Прижмите спину к каретке, опускайтесь до параллели бедер с платформой.", "default_w": "80"},
+            {"name": "Машина Смита (Присед / Выпады)", "svg": "smith", "tip": "Контролируйте траекторию грифа, держите кор в жестком тонусе.", "default_w": "60"},
+            {"name": "Разгибание ног сидя", "svg": "leg_ext", "tip": "Плавно разгибайте колени до пикового сокращения квадрицепса.", "default_w": "50"},
+            {"name": "Сгибание ног сидя / лежа", "svg": "leg_curl", "tip": "Прижимайте таз к скамье, сгибайте голень без отрыва бедер.", "default_w": "40"},
             {"name": "Тренажер для икр", "svg": "calves", "tip": "Максимальная растяжка внизу и пауза на носках в верхней точке.", "default_w": "50"},
-            {"name": "Жим лежа", "svg": "bench", "tip": "Лопатки сведены, жесткий упор ногами, опускайте гриф на низ груди.", "default_w": "70"},
-            {"name": "Жим гантелями на наклонной скамье", "svg": "incline_db", "tip": "Угол скамьи 30°, опускайте гантели глубоко вдоль линии ключиц.", "default_w": "24"},
-            {"name": "Скручивание", "svg": "crunch", "tip": "Скручивайте грудной отдел к тазу на выдохе, не тяните шею руками.", "default_w": "0"},
-            {"name": "Разгибание рук", "svg": "tricep", "tip": "Локти прижаты к корпусу, разгибайте предплечья до конца.", "default_w": "25"},
-            {"name": "Отжимание на брусьях в тренажере", "svg": "dips", "tip": "Опускайтесь до прямого угла в локтях, контролируя плечевой пояс.", "default_w": "40"},
-            {"name": "Сгибание рук на скамье Скотта", "svg": "scott", "tip": "Плечи плотно лежат на пюпитре, поднимайте вес без раскачки.", "default_w": "30"},
-            {"name": "Сгибание рук молот", "svg": "hammer", "tip": "Нейтральный хват (ладони друг к другу), локти неподвижны.", "default_w": "16"},
-            {"name": "Жим от плеч (гантели)", "svg": "shoulder_press", "tip": "Выжимайте гантели строго вверх без прогиба в пояснице.", "default_w": "20"},
+        ],
+    },
+    {
+        "category": "Плечи",
+        "items": [
+            {"name": "Жим от плеч (гантели / тренажер)", "svg": "shoulder_press", "tip": "Выжимайте вес строго вверх без излишнего прогиба в пояснице.", "default_w": "20"},
             {"name": "Махи в стороны (гантели)", "svg": "lat_raise", "tip": "Поднимайте локти до уровня плеч, слегка наклонив корпус вперед.", "default_w": "10"},
+            {"name": "Отведение назад в Пек-деке (Задняя дельта)", "svg": "fly", "tip": "Сядьте лицом к спинке тренажера и отводите прямые руки назад.", "default_w": "30"},
+        ],
+    },
+    {
+        "category": "Руки",
+        "items": [
+            {"name": "Разгибание рук на блоке (Трицепс)", "svg": "tricep", "tip": "Локти прижаты к корпусу, разгибайте предплечья до конца.", "default_w": "25"},
+            {"name": "Сгибание рук на скамье Скотта", "svg": "scott", "tip": "Плечи плотно лежат на пюпитре, поднимайте вес без раскачки.", "default_w": "30"},
+            {"name": "Подъем EZ-штанги на бицепс", "svg": "bb_curl", "tip": "Локти зафиксированы у корпуса, поднимайте гриф без заброса спиной.", "default_w": "30"},
+            {"name": "Сгибание рук молот", "svg": "hammer", "tip": "Нейтральный хват (ладони друг к другу), локти неподвижны.", "default_w": "16"},
+        ],
+    },
+    {
+        "category": "Пресс",
+        "items": [
+            {"name": "Скручивание", "svg": "crunch", "tip": "Скручивайте грудной отдел к тазу на выдохе, не тяните шею руками.", "default_w": "0"},
+            {"name": "Подъем ног в упоре", "svg": "leg_raise", "tip": "Прижмите поясницу к спинке и поднимайте колени к груди подконтрольно.", "default_w": "0"},
         ],
     },
 ]
@@ -283,6 +367,31 @@ DAYS_FULL = {
 }
 
 
+def safe_float(val, default=0.0):
+    try:
+        s = str(val).replace(",", ".").strip()
+        if not s:
+            return default
+        return float(s)
+    except Exception:
+        return default
+
+
+def safe_int(val, default=10):
+    try:
+        s = str(val).strip()
+        if not s:
+            return default
+        return int(float(s.replace(",", ".")))
+    except Exception:
+        return default
+
+
+def format_weight(val):
+    num = safe_float(val, 0.0)
+    return str(int(num) if num.is_integer() else round(num, 1))
+
+
 def load_state():
     if os.path.exists(DATA_FILE):
         try:
@@ -292,6 +401,8 @@ def load_state():
                     for d in DAYS_ORDER:
                         if d not in data["workouts"]:
                             data["workouts"][d] = []
+                    if "font_style" not in data["settings"]:
+                        data["settings"]["font_style"] = "bold"
                     return data
         except Exception:
             pass
@@ -299,6 +410,7 @@ def load_state():
         "settings": {
             "theme": "Stealth Monochrome",
             "glass_mode": "ios26",
+            "font_style": "bold",
         },
         "workouts": {d: [] for d in DAYS_ORDER},
     }
@@ -347,17 +459,55 @@ def main(page: ft.Page):
     page.window.width = 440
     page.window.height = 880
 
+    # Автоматическое подключение иконки окна, если она лежит в папке assets
+    if os.path.exists(os.path.join("assets", "icon.ico")):
+        page.window.icon = "icon.ico"
+    elif os.path.exists(os.path.join("assets", "icon.png")):
+        page.window.icon = "icon.png"
+
     state = load_state()
     workout_data = state["workouts"]
     settings = state["settings"]
 
-    current_day = "ПН"
+    today_idx = datetime.datetime.today().weekday()
+    current_day = DAYS_ORDER[today_idx] if 0 <= today_idx < 7 else "ПН"
+
     active_view = "workouts"  # "workouts", "catalog", "detail", "settings"
     selected_ex_idx = None
+    selected_cat_filter = "Все"
 
     def get_theme():
         t_name = settings.get("theme", "Stealth Monochrome")
         return THEMES.get(t_name, THEMES["Stealth Monochrome"])
+
+    def fw(level="title"):
+        is_thin = settings.get("font_style", "bold") == "thin"
+        if is_thin:
+            if level == "hero":
+                return ft.FontWeight.W_600
+            if level == "title":
+                return ft.FontWeight.W_500
+            return ft.FontWeight.W_400
+        else:
+            if level == "hero":
+                return ft.FontWeight.W_900
+            if level == "title":
+                return ft.FontWeight.W_900
+            return ft.FontWeight.W_700
+
+    def show_toast(msg: str):
+        theme = get_theme()
+        snack = ft.SnackBar(
+            bgcolor="#121216",
+            content=ft.Text(msg, color=theme["accent"], weight=fw("title"), size=13),
+            duration=2200,
+        )
+        try:
+            page.open(snack)
+        except Exception:
+            page.snack_bar = snack
+            snack.open = True
+            page.update()
 
     def ios26_glass(content, padding=14, radius=22, is_highlighted=False, on_click=None):
         theme = get_theme()
@@ -407,6 +557,11 @@ def main(page: ft.Page):
         active_view = view_name
         rebuild_ui()
 
+    def select_cat_filter(cat_name):
+        nonlocal selected_cat_filter
+        selected_cat_filter = cat_name
+        rebuild_ui()
+
     def open_exercise_detail(idx):
         nonlocal selected_ex_idx, active_view
         selected_ex_idx = idx
@@ -417,18 +572,90 @@ def main(page: ft.Page):
         w = item.get("default_w", "40")
         new_ex = {
             "name": item["name"],
-            "svg": item["svg"],
+            "svg": item.get("svg", "bench"),
+            "tip": item.get("tip", "Выполняйте движение подконтрольно и без рывков."),
             "done": False,
+            "last_date": None,
             "sets_data": [
-                {"weight": str(w), "reps": "10", "done": False},
-                {"weight": str(w), "reps": "10", "done": False},
-                {"weight": str(w), "reps": "10", "done": False},
-                {"weight": str(w), "reps": "10", "done": False},
+                {"weight": str(w), "reps": "10", "done": False, "prev_weight": None, "prev_reps": None}
+                for _ in range(4)
             ],
         }
         workout_data[current_day].append(new_ex)
         save_state(state)
         open_exercise_detail(len(workout_data[current_day]) - 1)
+
+    # Модальное окно для создания своего упражнения (без устаревшего ElevatedButton)
+    custom_name_input = ft.TextField(
+        label="Название упражнения / тренажера",
+        border_color="#26FFFFFF",
+        focused_border_color="#FFFFFF",
+        text_style=ft.TextStyle(color="#FFFFFF"),
+    )
+    custom_weight_input = ft.TextField(
+        label="Рабочий вес (кг)",
+        value="40",
+        border_color="#26FFFFFF",
+        focused_border_color="#FFFFFF",
+        text_style=ft.TextStyle(color="#FFFFFF"),
+    )
+    custom_tip_input = ft.TextField(
+        label="Заметка по технике (необязательно)",
+        value="Подконтрольное выполнение в полной амплитуде.",
+        border_color="#26FFFFFF",
+        focused_border_color="#FFFFFF",
+        text_style=ft.TextStyle(color="#FFFFFF"),
+    )
+
+    def close_custom_dialog(e=None):
+        custom_dialog.open = False
+        page.update()
+
+    def save_custom_exercise(e):
+        name_val = (custom_name_input.value or "").strip()
+        if name_val:
+            w_val = format_weight(custom_weight_input.value or "40")
+            tip_val = (custom_tip_input.value or "").strip() or "Подконтрольное выполнение."
+            custom_name_input.value = ""
+            close_custom_dialog()
+            add_from_catalog(
+                {
+                    "name": name_val,
+                    "svg": "bench",
+                    "tip": tip_val,
+                    "default_w": w_val,
+                }
+            )
+
+    custom_dialog = ft.AlertDialog(
+        bgcolor="#08080C",
+        title=ft.Text("СВОЁ УПРАЖНЕНИЕ", size=16, weight=ft.FontWeight.W_800, color="#FFFFFF"),
+        content=ft.Column(
+            tight=True,
+            spacing=12,
+            controls=[custom_name_input, custom_weight_input, custom_tip_input],
+        ),
+        actions=[
+            ft.Container(
+                content=ft.Text("Отмена", color="#8AFFFFFF", weight=ft.FontWeight.W_700),
+                padding=make_padding(14, 10, 14, 10),
+                border_radius=12,
+                on_click=close_custom_dialog,
+            ),
+            ft.Container(
+                content=ft.Text("ДОБАВИТЬ", color="#000000", weight=ft.FontWeight.W_900),
+                bgcolor="#FFFFFF",
+                padding=make_padding(18, 10, 18, 10),
+                border_radius=12,
+                on_click=save_custom_exercise,
+            ),
+        ],
+    )
+    page.overlay.append(custom_dialog)
+
+    def open_custom_dialog(e):
+        custom_dialog.open = True
+        page.update()
 
     def toggle_exercise_done(day, idx):
         ex = workout_data[day][idx]
@@ -443,6 +670,23 @@ def main(page: ft.Page):
         workout_data[day].pop(idx)
         save_state(state)
         rebuild_ui()
+
+    def finish_workout(e):
+        day_exercises = workout_data.get(current_day, [])
+        if not day_exercises:
+            return
+        date_str = datetime.datetime.now().strftime("%d.%m")
+        for ex in day_exercises:
+            sets_data = ex.get("sets_data", [])
+            for s in sets_data:
+                s["prev_weight"] = format_weight(s.get("weight", "0"))
+                s["prev_reps"] = str(safe_int(s.get("reps", "10"), 10))
+                s["done"] = False
+            ex["last_date"] = date_str
+            ex["done"] = False
+        save_state(state)
+        rebuild_ui()
+        show_toast(f"Тренировка завершена ({date_str})! Силовые сохранены для следующего раза.")
 
     def reset_day_progress(e):
         for ex in workout_data[current_day]:
@@ -459,6 +703,11 @@ def main(page: ft.Page):
 
     def change_glass_mode(mode_name):
         settings["glass_mode"] = mode_name
+        save_state(state)
+        rebuild_ui()
+
+    def change_font_style(style_name):
+        settings["font_style"] = style_name
         save_state(state)
         rebuild_ui()
 
@@ -489,7 +738,7 @@ def main(page: ft.Page):
                             ft.Text(
                                 day,
                                 size=12,
-                                weight=ft.FontWeight.W_900,
+                                weight=fw("title"),
                                 color="#000000" if is_sel else "#FFFFFF",
                             ),
                             ft.Container(
@@ -504,9 +753,15 @@ def main(page: ft.Page):
             )
 
         day_exercises = workout_data.get(current_day, [])
-        total = len(day_exercises)
-        done_count = sum(1 for ex in day_exercises if ex.get("done", False))
-        progress = done_count / total if total > 0 else 0
+        total_ex = len(day_exercises)
+        done_ex_count = sum(1 for ex in day_exercises if ex.get("done", False))
+
+        total_sets_all = sum(len(ex.get("sets_data", [])) for ex in day_exercises)
+        done_sets_all = sum(
+            sum(1 for s in ex.get("sets_data", []) if s.get("done", False))
+            for ex in day_exercises
+        )
+        progress = done_sets_all / total_sets_all if total_sets_all > 0 else 0
         pct = int(progress * 100)
 
         progress_card = ios26_glass(
@@ -524,13 +779,13 @@ def main(page: ft.Page):
                                     ft.Text(
                                         f"{DAYS_FULL.get(current_day, current_day).upper()} • ПРОГРАММА",
                                         size=11,
-                                        weight=ft.FontWeight.W_900,
+                                        weight=fw("title"),
                                         color="#75FFFFFF",
                                     ),
                                     ft.Text(
-                                        f"ВЫПОЛНЕНО: {done_count} ИЗ {total} ({pct}%)",
-                                        size=14,
-                                        weight=ft.FontWeight.W_900,
+                                        f"ПОДХОДЫ: {done_sets_all}/{total_sets_all} • УПР: {done_ex_count}/{total_ex} ({pct}%)",
+                                        size=13,
+                                        weight=fw("hero"),
                                         color=accent,
                                     ),
                                 ],
@@ -541,7 +796,7 @@ def main(page: ft.Page):
                                 border_radius=12,
                                 bgcolor="#14FFFFFF",
                                 border=make_border(1, "#24FFFFFF"),
-                                content=ft.Text("СБРОС", size=11, weight=ft.FontWeight.W_900, color=accent),
+                                content=ft.Text("СБРОС", size=11, weight=fw("title"), color=accent),
                             ),
                         ],
                     ),
@@ -558,7 +813,7 @@ def main(page: ft.Page):
 
         ex_list = ft.Column(spacing=10, scroll=ft.ScrollMode.HIDDEN, expand=True)
 
-        if total == 0:
+        if total_ex == 0:
             ex_list.controls.append(
                 ios26_glass(
                     padding=28,
@@ -572,13 +827,13 @@ def main(page: ft.Page):
                             ft.Text(
                                 f"{DAYS_FULL.get(current_day, '').upper()} — ПУСТО",
                                 size=15,
-                                weight=ft.FontWeight.W_900,
+                                weight=fw("hero"),
                                 color="#FFFFFF",
                             ),
                             ft.Text(
-                                "Нажмите сюда или на «+», чтобы выбрать тренажеры и упражнения из списка с картинками",
+                                "Нажмите сюда или перейдите в «Каталог» внизу экрана, чтобы выбрать тренажеры по группам мышц",
                                 size=12,
-                                weight=ft.FontWeight.W_600,
+                                weight=fw("body"),
                                 color="#80FFFFFF",
                                 text_align=ft.TextAlign.CENTER,
                             ),
@@ -592,9 +847,27 @@ def main(page: ft.Page):
             sets_data = ex.get("sets_data", [])
             sets_count = len(sets_data)
             done_sets = sum(1 for s in sets_data if s.get("done", False))
-            max_w = max([float(str(s.get("weight", 0)).replace(",", ".") or 0) for s in sets_data], default=0)
-            w_str = str(int(max_w) if max_w.is_integer() else max_w)
-            reps_preview = "/".join(str(s.get("reps", 10)) for s in sets_data[:4])
+            max_w = max([safe_float(s.get("weight", 0)) for s in sets_data], default=0.0)
+            w_str = format_weight(max_w)
+            reps_preview = "/".join(str(safe_int(s.get("reps", 10))) for s in sets_data[:4])
+
+            prev_weights = [
+                safe_float(s.get("prev_weight"))
+                for s in sets_data
+                if s.get("prev_weight") is not None
+            ]
+            has_prev = len(prev_weights) > 0
+            prev_max_w = format_weight(max(prev_weights)) if has_prev else None
+            prev_reps_preview = (
+                "/".join(
+                    str(s.get("prev_reps", "10"))
+                    for s in sets_data[:4]
+                    if s.get("prev_reps") is not None
+                )
+                if has_prev
+                else ""
+            )
+            last_date_lbl = ex.get("last_date") or ""
 
             svg_key = ex.get("svg") or CATALOG_MAP.get(ex["name"], {}).get("svg", "bench")
 
@@ -624,50 +897,66 @@ def main(page: ft.Page):
                 content=render_svg(svg_key, width=60, height=40),
             )
 
-            info_area = ft.Container(
-                expand=True,
-                on_click=lambda e, i=idx: open_exercise_detail(i),
-                content=ft.Column(
-                    spacing=5,
+            info_controls = [
+                ft.Text(
+                    ex["name"],
+                    size=14,
+                    weight=fw("title"),
+                    color="#55FFFFFF" if is_done else "#FFFFFF",
+                    style=ft.TextStyle(
+                        decoration=ft.TextDecoration.LINE_THROUGH if is_done else None
+                    ),
+                ),
+                ft.Row(
+                    spacing=6,
                     controls=[
-                        ft.Text(
-                            ex["name"],
-                            size=14,
-                            weight=ft.FontWeight.W_900,
-                            color="#55FFFFFF" if is_done else "#FFFFFF",
-                            style=ft.TextStyle(
-                                decoration=ft.TextDecoration.LINE_THROUGH if is_done else None
+                        ft.Container(
+                            padding=make_padding(8, 3, 8, 3),
+                            border_radius=8,
+                            bgcolor=theme["badge_bg"],
+                            content=ft.Text(
+                                f"{done_sets}/{sets_count} ПОДХ • {reps_preview}",
+                                size=10,
+                                weight=fw("title"),
+                                color=accent,
                             ),
                         ),
-                        ft.Row(
-                            spacing=6,
-                            controls=[
-                                ft.Container(
-                                    padding=make_padding(8, 3, 8, 3),
-                                    border_radius=8,
-                                    bgcolor=theme["badge_bg"],
-                                    content=ft.Text(
-                                        f"{done_sets}/{sets_count} ПОДХ • {reps_preview}",
-                                        size=10,
-                                        weight=ft.FontWeight.W_900,
-                                        color=accent,
-                                    ),
-                                ),
-                                ft.Container(
-                                    padding=make_padding(8, 3, 8, 3),
-                                    border_radius=8,
-                                    bgcolor="#14FFFFFF",
-                                    content=ft.Text(
-                                        f"{w_str} КГ",
-                                        size=10,
-                                        weight=ft.FontWeight.W_900,
-                                        color=theme["secondary"],
-                                    ),
-                                ),
-                            ],
+                        ft.Container(
+                            padding=make_padding(8, 3, 8, 3),
+                            border_radius=8,
+                            bgcolor="#14FFFFFF",
+                            content=ft.Text(
+                                f"{w_str} КГ",
+                                size=10,
+                                weight=fw("title"),
+                                color=theme["secondary"],
+                            ),
                         ),
                     ],
                 ),
+            ]
+
+            if has_prev:
+                date_part = f" ({last_date_lbl})" if last_date_lbl else ""
+                info_controls.append(
+                    ft.Row(
+                        spacing=4,
+                        controls=[
+                            ft.Icon(ft.Icons.HISTORY_ROUNDED, size=12, color="#75FFFFFF"),
+                            ft.Text(
+                                f"Прошлый раз{date_part}: {prev_max_w} кг × {prev_reps_preview}",
+                                size=10,
+                                weight=fw("body"),
+                                color="#85FFFFFF",
+                            ),
+                        ],
+                    )
+                )
+
+            info_area = ft.Container(
+                expand=True,
+                on_click=lambda e, i=idx: open_exercise_detail(i),
+                content=ft.Column(spacing=4, controls=info_controls),
             )
 
             card_row = ft.Row(
@@ -695,32 +984,99 @@ def main(page: ft.Page):
                 )
             )
 
+        if total_ex > 0:
+            ex_list.controls.append(
+                ft.Container(
+                    on_click=finish_workout,
+                    margin=make_padding(0, 6, 0, 10),
+                    padding=make_padding(16, 15, 16, 15),
+                    border_radius=20,
+                    bgcolor=accent,
+                    alignment=ft.Alignment(0, 0) if hasattr(ft, "Alignment") else None,
+                    content=ft.Row(
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        spacing=8,
+                        controls=[
+                            ft.Icon(ft.Icons.CHECK_CIRCLE_ROUNDED, color="#000000", size=20),
+                            ft.Text(
+                                "ЗАКОНЧИТЬ ТРЕНИРОВКУ (СОХРАНИТЬ СИЛОВЫЕ)",
+                                size=12,
+                                weight=fw("hero"),
+                                color="#000000",
+                            ),
+                        ],
+                    ),
+                )
+            )
+
         return [day_tabs, progress_card, ex_list]
 
-    # Экран 2: Каталог тренажеров и упражнений с картинками (открывается по "+")
+    # Экран 2: Каталог тренажеров по группам мышц
     def build_catalog_view():
         theme = get_theme()
         accent = theme["accent"]
 
-        cat_col = ft.Column(spacing=12, scroll=ft.ScrollMode.HIDDEN, expand=True)
+        cat_col = ft.Column(spacing=10, scroll=ft.ScrollMode.HIDDEN, expand=True)
 
         cat_col.controls.append(
-            ft.Text(
-                f"ВЫБЕРИТЕ ТРЕНАЖЕР ДЛЯ ДНЯ: {DAYS_FULL.get(current_day, current_day).upper()}",
-                size=11,
-                weight=ft.FontWeight.W_900,
-                color=accent,
+            ft.Row(
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                controls=[
+                    ft.Text(
+                        f"ДЕНЬ: {DAYS_FULL.get(current_day, current_day).upper()}",
+                        size=11,
+                        weight=fw("title"),
+                        color=accent,
+                    ),
+                    ft.Container(
+                        on_click=open_custom_dialog,
+                        padding=make_padding(12, 6, 12, 6),
+                        border_radius=12,
+                        bgcolor="#16FFFFFF",
+                        border=make_border(1, accent),
+                        content=ft.Text(
+                            "+ СВОЁ УПРАЖНЕНИЕ",
+                            size=10,
+                            weight=fw("title"),
+                            color=accent,
+                        ),
+                    ),
+                ],
             )
         )
 
+        categories = ["Все"] + [g["category"] for g in EXERCISE_CATALOG]
+        filter_row = ft.Row(scroll=ft.ScrollMode.HIDDEN, spacing=6)
+        for cat_name in categories:
+            is_sel = selected_cat_filter == cat_name
+            filter_row.controls.append(
+                ft.Container(
+                    on_click=lambda e, c=cat_name: select_cat_filter(c),
+                    padding=make_padding(14, 7, 14, 7),
+                    border_radius=14,
+                    bgcolor=accent if is_sel else "#10FFFFFF",
+                    border=make_border(1, accent if is_sel else "#22FFFFFF"),
+                    content=ft.Text(
+                        cat_name.upper(),
+                        size=10,
+                        weight=fw("title"),
+                        color="#000000" if is_sel else "#FFFFFF",
+                    ),
+                )
+            )
+        cat_col.controls.append(filter_row)
+
         for group in EXERCISE_CATALOG:
+            if selected_cat_filter != "Все" and group["category"] != selected_cat_filter:
+                continue
+
             cat_col.controls.append(
                 ft.Container(
                     padding=make_padding(0, 6, 0, 2),
                     content=ft.Text(
                         group["category"].upper(),
                         size=12,
-                        weight=ft.FontWeight.W_900,
+                        weight=fw("title"),
                         color="#80FFFFFF",
                     ),
                 )
@@ -750,13 +1106,13 @@ def main(page: ft.Page):
                                     ft.Text(
                                         item["name"],
                                         size=14,
-                                        weight=ft.FontWeight.W_900,
+                                        weight=fw("title"),
                                         color="#FFFFFF",
                                     ),
                                     ft.Text(
                                         item["tip"],
                                         size=11,
-                                        weight=ft.FontWeight.W_600,
+                                        weight=fw("body"),
                                         color="#75FFFFFF",
                                         max_lines=2,
                                     ),
@@ -777,7 +1133,7 @@ def main(page: ft.Page):
 
         return [cat_col]
 
-    # Экран 3: Настройка каждого подхода отдельно (вес + повторы на каждый подход)
+    # Экран 3: Настройка каждого подхода отдельно + показ прошлых силовых
     def build_exercise_detail_view():
         theme = get_theme()
         accent = theme["accent"]
@@ -790,12 +1146,14 @@ def main(page: ft.Page):
         ex = day_list[selected_ex_idx]
         if "sets_data" not in ex or not ex["sets_data"]:
             ex["sets_data"] = [
-                {"weight": "50", "reps": "10", "done": False} for _ in range(4)
+                {"weight": "50", "reps": "10", "done": False, "prev_weight": None, "prev_reps": None}
+                for _ in range(4)
             ]
 
         cat_info = CATALOG_MAP.get(ex["name"], {})
         svg_key = ex.get("svg") or cat_info.get("svg", "bench")
-        tip_text = cat_info.get("tip", "Выполняйте движение подконтрольно и без рывков.")
+        tip_text = ex.get("tip") or cat_info.get("tip", "Выполняйте движение подконтрольно и без рывков.")
+        last_date_lbl = ex.get("last_date")
 
         def sync_done_status():
             sets_list = ex["sets_data"]
@@ -804,12 +1162,9 @@ def main(page: ft.Page):
 
         def change_set_weight(s_idx, delta):
             s = ex["sets_data"][s_idx]
-            try:
-                cur = float(str(s.get("weight", "0")).replace(",", "."))
-                nv = max(0.0, cur + delta)
-                s["weight"] = str(int(nv) if nv.is_integer() else round(nv, 1))
-            except Exception:
-                s["weight"] = "20"
+            cur = safe_float(s.get("weight", "0"), 0.0)
+            nv = max(0.0, cur + delta)
+            s["weight"] = format_weight(nv)
             save_state(state)
             rebuild_ui()
 
@@ -819,12 +1174,9 @@ def main(page: ft.Page):
 
         def change_set_reps(s_idx, delta):
             s = ex["sets_data"][s_idx]
-            try:
-                cur = int(str(s.get("reps", "10")).strip())
-                nv = max(1, cur + delta)
-                s["reps"] = str(nv)
-            except Exception:
-                s["reps"] = "10"
+            cur = safe_int(s.get("reps", "10"), 10)
+            nv = max(1, cur + delta)
+            s["reps"] = str(nv)
             save_state(state)
             rebuild_ui()
 
@@ -840,7 +1192,9 @@ def main(page: ft.Page):
         def add_new_set(e):
             last_w = ex["sets_data"][-1]["weight"] if ex["sets_data"] else "50"
             last_r = ex["sets_data"][-1]["reps"] if ex["sets_data"] else "10"
-            ex["sets_data"].append({"weight": str(last_w), "reps": str(last_r), "done": False})
+            ex["sets_data"].append(
+                {"weight": str(last_w), "reps": str(last_r), "done": False, "prev_weight": None, "prev_reps": None}
+            )
             sync_done_status()
             rebuild_ui()
 
@@ -852,7 +1206,6 @@ def main(page: ft.Page):
 
         detail_col = ft.Column(spacing=12, scroll=ft.ScrollMode.HIDDEN, expand=True)
 
-        # Карточка с иллюстрацией и техникой
         detail_col.controls.append(
             ios26_glass(
                 padding=14,
@@ -864,22 +1217,27 @@ def main(page: ft.Page):
                         ft.Row(
                             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                             controls=[
-                                ft.Text("ТЕХНИКА ТРЕНАЖЕРА", size=10, weight=ft.FontWeight.W_900, color="#75FFFFFF"),
-                                ft.Text(DAYS_FULL.get(current_day, current_day).upper(), size=10, weight=ft.FontWeight.W_900, color=accent),
+                                ft.Text("ТЕХНИКА ТРЕНАЖЕРА", size=10, weight=fw("title"), color="#75FFFFFF"),
+                                ft.Text(
+                                    DAYS_FULL.get(current_day, current_day).upper(),
+                                    size=10,
+                                    weight=fw("title"),
+                                    color=accent,
+                                ),
                             ],
                         ),
                         render_svg(svg_key, width=240, height=125),
                         ft.Text(
                             ex["name"].upper(),
                             size=16,
-                            weight=ft.FontWeight.W_900,
+                            weight=fw("hero"),
                             color="#FFFFFF",
                             text_align=ft.TextAlign.CENTER,
                         ),
                         ft.Text(
                             tip_text,
                             size=11,
-                            weight=ft.FontWeight.W_600,
+                            weight=fw("body"),
                             color="#90FFFFFF",
                             text_align=ft.TextAlign.CENTER,
                         ),
@@ -888,26 +1246,46 @@ def main(page: ft.Page):
             )
         )
 
-        # Заголовок таблицы подходов
         detail_col.controls.append(
             ft.Row(
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                 controls=[
-                    ft.Text("НАСТРОЙКА КАЖДОГО ПОДХОДА", size=11, weight=ft.FontWeight.W_900, color="#80FFFFFF"),
+                    ft.Text("НАСТРОЙКА КАЖДОГО ПОДХОДА", size=11, weight=fw("title"), color="#80FFFFFF"),
                     ft.Container(
                         on_click=add_new_set,
                         padding=make_padding(12, 6, 12, 6),
                         border_radius=12,
                         bgcolor=accent,
-                        content=ft.Text("+ ДОБАВИТЬ ПОДХОД", size=10, weight=ft.FontWeight.W_900, color="#000000"),
+                        content=ft.Text("+ ДОБАВИТЬ ПОДХОД", size=10, weight=fw("title"), color="#000000"),
                     ),
                 ],
             )
         )
 
-        # Список подходов с удобными кнопками настройки веса (КГ) и повторений (ПОВТ)
         for s_idx, s_data in enumerate(ex["sets_data"]):
             s_done = s_data.get("done", False)
+            prev_w = s_data.get("prev_weight")
+            prev_r = s_data.get("prev_reps")
+            has_set_prev = prev_w is not None and prev_r is not None
+            date_suffix = f" ({last_date_lbl})" if last_date_lbl else ""
+
+            title_col_controls = [
+                ft.Text(
+                    f"ПОДХОД #{s_idx + 1}",
+                    size=13,
+                    weight=fw("title"),
+                    color=accent if s_done else "#FFFFFF",
+                )
+            ]
+            if has_set_prev:
+                title_col_controls.append(
+                    ft.Text(
+                        f"Прошлый раз{date_suffix}: {prev_w} кг × {prev_r}",
+                        size=10,
+                        weight=fw("body"),
+                        color="#85FFFFFF",
+                    )
+                )
 
             set_card = ios26_glass(
                 padding=12,
@@ -935,12 +1313,7 @@ def main(page: ft.Page):
                                                 color="#000000" if s_done else "#60FFFFFF",
                                             ),
                                         ),
-                                        ft.Text(
-                                            f"ПОДХОД #{s_idx + 1}",
-                                            size=13,
-                                            weight=ft.FontWeight.W_900,
-                                            color=accent if s_done else "#FFFFFF",
-                                        ),
+                                        ft.Column(spacing=1, controls=title_col_controls),
                                     ],
                                 ),
                                 ft.Row(
@@ -954,7 +1327,7 @@ def main(page: ft.Page):
                                             content=ft.Text(
                                                 "ГОТОВО" if s_done else "ОТМЕТИТЬ",
                                                 size=10,
-                                                weight=ft.FontWeight.W_900,
+                                                weight=fw("title"),
                                                 color="#000000" if s_done else "#FFFFFF",
                                             ),
                                         ),
@@ -970,7 +1343,6 @@ def main(page: ft.Page):
                                 ),
                             ],
                         ),
-                        # Строка настройки КГ и ПОВТОРЕНИЙ (совместимая с Flet 1.0)
                         ft.Row(
                             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                             controls=[
@@ -988,7 +1360,7 @@ def main(page: ft.Page):
                                                 padding=make_padding(8, 8, 8, 8),
                                                 border_radius=10,
                                                 bgcolor="#1AFFFFFF",
-                                                content=ft.Text("-2.5", size=11, weight=ft.FontWeight.W_900, color="#FFFFFF"),
+                                                content=ft.Text("-2.5", size=11, weight=fw("title"), color="#FFFFFF"),
                                             ),
                                             ft.Column(
                                                 spacing=0,
@@ -1001,10 +1373,12 @@ def main(page: ft.Page):
                                                         content_padding=make_padding(2, 2, 2, 2),
                                                         text_align=ft.TextAlign.CENTER,
                                                         border_color="transparent",
-                                                        text_style=ft.TextStyle(size=15, weight=ft.FontWeight.W_900, color="#FFFFFF"),
+                                                        text_style=ft.TextStyle(
+                                                            size=15, weight=fw("hero"), color="#FFFFFF"
+                                                        ),
                                                         on_change=lambda e, i=s_idx: on_weight_typed(e, i),
                                                     ),
-                                                    ft.Text("КГ", size=9, weight=ft.FontWeight.W_900, color="#65FFFFFF"),
+                                                    ft.Text("КГ", size=9, weight=fw("title"), color="#65FFFFFF"),
                                                 ],
                                             ),
                                             ft.Container(
@@ -1012,7 +1386,7 @@ def main(page: ft.Page):
                                                 padding=make_padding(8, 8, 8, 8),
                                                 border_radius=10,
                                                 bgcolor=accent,
-                                                content=ft.Text("+2.5", size=11, weight=ft.FontWeight.W_900, color="#000000"),
+                                                content=ft.Text("+2.5", size=11, weight=fw("title"), color="#000000"),
                                             ),
                                         ],
                                     ),
@@ -1031,7 +1405,7 @@ def main(page: ft.Page):
                                                 padding=make_padding(9, 8, 9, 8),
                                                 border_radius=10,
                                                 bgcolor="#1AFFFFFF",
-                                                content=ft.Text("-1", size=11, weight=ft.FontWeight.W_900, color="#FFFFFF"),
+                                                content=ft.Text("-1", size=11, weight=fw("title"), color="#FFFFFF"),
                                             ),
                                             ft.Column(
                                                 spacing=0,
@@ -1044,10 +1418,12 @@ def main(page: ft.Page):
                                                         content_padding=make_padding(2, 2, 2, 2),
                                                         text_align=ft.TextAlign.CENTER,
                                                         border_color="transparent",
-                                                        text_style=ft.TextStyle(size=15, weight=ft.FontWeight.W_900, color=accent),
+                                                        text_style=ft.TextStyle(
+                                                            size=15, weight=fw("hero"), color=accent
+                                                        ),
                                                         on_change=lambda e, i=s_idx: on_reps_typed(e, i),
                                                     ),
-                                                    ft.Text("ПОВТ", size=9, weight=ft.FontWeight.W_900, color="#65FFFFFF"),
+                                                    ft.Text("ПОВТ", size=9, weight=fw("title"), color="#65FFFFFF"),
                                                 ],
                                             ),
                                             ft.Container(
@@ -1055,7 +1431,7 @@ def main(page: ft.Page):
                                                 padding=make_padding(9, 8, 9, 8),
                                                 border_radius=10,
                                                 bgcolor=accent,
-                                                content=ft.Text("+1", size=11, weight=ft.FontWeight.W_900, color="#000000"),
+                                                content=ft.Text("+1", size=11, weight=fw("title"), color="#000000"),
                                             ),
                                         ],
                                     ),
@@ -1075,11 +1451,52 @@ def main(page: ft.Page):
         accent = theme["accent"]
         current_theme_name = settings.get("theme", "Stealth Monochrome")
         current_glass_mode = settings.get("glass_mode", "ios26")
+        current_font_style = settings.get("font_style", "bold")
 
         settings_list = ft.Column(spacing=12, scroll=ft.ScrollMode.HIDDEN, expand=True)
 
         settings_list.controls.append(
-            ft.Text("ОПТИКА СТЕКЛА (iOS 26)", size=12, weight=ft.FontWeight.W_900, color="#70FFFFFF")
+            ft.Text("СТИЛЬ ШРИФТА", size=12, weight=fw("title"), color="#70FFFFFF")
+        )
+
+        font_modes = [
+            ("bold", "Толстый (Heavy Bold)", "Мощный акцентный шрифт в спортивном стиле"),
+            ("thin", "Тонкий (Minimal Light)", "Изящный минималистичный шрифт с тонкими линиями"),
+        ]
+
+        for f_key, f_title, f_sub in font_modes:
+            is_f_active = current_font_style == f_key
+            settings_list.controls.append(
+                ios26_glass(
+                    padding=15,
+                    radius=22,
+                    is_highlighted=is_f_active,
+                    on_click=lambda e, fk=f_key: change_font_style(fk),
+                    content=ft.Row(
+                        alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                        controls=[
+                            ft.Column(
+                                spacing=3,
+                                controls=[
+                                    ft.Text(f_title, size=14, weight=fw("title"), color="#FFFFFF"),
+                                    ft.Text(f_sub, size=11, weight=fw("body"), color="#80FFFFFF"),
+                                ],
+                            ),
+                            ft.Icon(
+                                ft.Icons.CHECK_CIRCLE_ROUNDED if is_f_active else ft.Icons.CIRCLE_OUTLINED,
+                                color=accent if is_f_active else "#40FFFFFF",
+                                size=20,
+                            ),
+                        ],
+                    ),
+                )
+            )
+
+        settings_list.controls.append(
+            ft.Container(
+                padding=make_padding(0, 6, 0, 0),
+                content=ft.Text("ОПТИКА СТЕКЛА (iOS 26)", size=12, weight=fw("title"), color="#70FFFFFF"),
+            )
         )
 
         glass_modes = [
@@ -1101,8 +1518,8 @@ def main(page: ft.Page):
                             ft.Column(
                                 spacing=3,
                                 controls=[
-                                    ft.Text(title, size=14, weight=ft.FontWeight.W_900, color="#FFFFFF"),
-                                    ft.Text(subtitle, size=11, weight=ft.FontWeight.W_600, color="#80FFFFFF"),
+                                    ft.Text(title, size=14, weight=fw("title"), color="#FFFFFF"),
+                                    ft.Text(subtitle, size=11, weight=fw("body"), color="#80FFFFFF"),
                                 ],
                             ),
                             ft.Icon(
@@ -1118,7 +1535,7 @@ def main(page: ft.Page):
         settings_list.controls.append(
             ft.Container(
                 padding=make_padding(0, 6, 0, 0),
-                content=ft.Text("СТЕЛС-ТЕМЫ (MONOCHROME SERIES)", size=12, weight=ft.FontWeight.W_900, color="#70FFFFFF"),
+                content=ft.Text("СТЕЛС-ТЕМЫ (MONOCHROME SERIES)", size=12, weight=fw("title"), color="#70FFFFFF"),
             )
         )
 
@@ -1146,7 +1563,7 @@ def main(page: ft.Page):
                                     ft.Text(
                                         t_name.upper(),
                                         size=13,
-                                        weight=ft.FontWeight.W_900,
+                                        weight=fw("title"),
                                         color="#FFFFFF",
                                     ),
                                 ],
@@ -1154,7 +1571,7 @@ def main(page: ft.Page):
                             ft.Text(
                                 "АКТИВНА" if is_sel else "ВЫБРАТЬ",
                                 size=11,
-                                weight=ft.FontWeight.W_900,
+                                weight=fw("title"),
                                 color=t_vals["accent"] if is_sel else "#55FFFFFF",
                             ),
                         ],
@@ -1176,29 +1593,60 @@ def main(page: ft.Page):
             "settings": "НАСТРОЙКИ",
         }
 
+        has_custom_icon = os.path.exists(os.path.join("assets", "icon.png"))
+
+        title_row_controls = []
+        if has_custom_icon:
+            title_row_controls.append(
+                ft.Container(
+                    width=36,
+                    height=36,
+                    border_radius=10,
+                    bgcolor="#000000",
+                    border=make_border(1, "#26FFFFFF"),
+                    clip_behavior=ft.ClipBehavior.ANTI_ALIAS,
+                    content=ft.Image(src="icon.png", width=36, height=36),
+                )
+            )
+
+        title_row_controls.append(
+            ft.Column(
+                spacing=2,
+                controls=[
+                    ft.Text(
+                        titles.get(active_view, "OLED"),
+                        size=28,
+                        weight=fw("hero"),
+                        color="#FFFFFF",
+                    ),
+                    ft.Text(
+                        f"{settings.get('theme', '').upper()}",
+                        size=10,
+                        weight=fw("title"),
+                        color=theme["secondary"],
+                    ),
+                ],
+            )
+        )
+
         header = ft.Row(
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
             controls=[
-                ft.Column(
-                    spacing=2,
-                    controls=[
-                        ft.Text(
-                            titles.get(active_view, "OLED"),
-                            size=28,
-                            weight=ft.FontWeight.W_900,
-                            color="#FFFFFF",
-                        ),
-                        ft.Text(
-                            f"{settings.get('theme', '').upper()}",
-                            size=10,
-                            weight=ft.FontWeight.W_800,
-                            color=theme["secondary"],
-                        ),
-                    ],
-                ),
+                ft.Row(spacing=10, controls=title_row_controls),
                 ft.Row(
                     spacing=10,
                     controls=[
+                        ios26_glass(
+                            padding=4,
+                            radius=16,
+                            content=ft.IconButton(
+                                icon=ft.Icons.ARROW_BACK_ROUNDED,
+                                icon_color=accent,
+                                on_click=lambda e: switch_view("workouts"),
+                            ),
+                        )
+                        if active_view == "detail"
+                        else ft.Container(),
                         ios26_glass(
                             padding=4,
                             radius=16,
@@ -1211,55 +1659,46 @@ def main(page: ft.Page):
                         )
                         if active_view == "workouts"
                         else ft.Container(),
-                        ios26_glass(
-                            padding=4,
-                            radius=16,
-                            is_highlighted=(active_view != "workouts"),
-                            content=ft.IconButton(
-                                icon=ft.Icons.TUNE_ROUNDED
-                                if active_view == "workouts"
-                                else ft.Icons.ARROW_BACK_ROUNDED,
-                                icon_color=accent,
-                                on_click=lambda e: switch_view(
-                                    "settings" if active_view == "workouts" else "workouts"
-                                ),
-                            ),
-                        ),
                     ],
                 ),
             ],
         )
 
-        # Нижний док только с разделом ТРЕНИРОВКИ
-        bottom_dock = ios26_glass(
-            padding=8,
-            radius=26,
-            on_click=lambda e: switch_view("workouts"),
-            content=ft.Row(
-                alignment=ft.MainAxisAlignment.CENTER,
-                controls=[
-                    ft.Container(
-                        animate=make_anim(250),
-                        padding=make_padding(36, 10, 36, 10),
-                        border_radius=18,
-                        bgcolor=accent if active_view == "workouts" else "#14FFFFFF",
-                        content=ft.Row(
-                            spacing=10,
-                            controls=[
-                                ft.Icon(
-                                    ft.Icons.FITNESS_CENTER_ROUNDED,
-                                    size=18,
-                                    color="#000000" if active_view == "workouts" else "#FFFFFF",
-                                ),
-                                ft.Text(
-                                    "ТРЕНИРОВКИ",
-                                    size=12,
-                                    weight=ft.FontWeight.W_900,
-                                    color="#000000" if active_view == "workouts" else "#FFFFFF",
-                                ),
-                            ],
+        def dock_btn(view_key, icon_data, label):
+            is_act = active_view == view_key or (view_key == "workouts" and active_view == "detail")
+            return ft.Container(
+                on_click=lambda e: switch_view(view_key),
+                animate=make_anim(240),
+                padding=make_padding(16, 10, 16, 10),
+                border_radius=18,
+                bgcolor=accent if is_act else "transparent",
+                content=ft.Row(
+                    spacing=6,
+                    controls=[
+                        ft.Icon(
+                            icon_data,
+                            size=17,
+                            color="#000000" if is_act else "#85FFFFFF",
                         ),
-                    ),
+                        ft.Text(
+                            label,
+                            size=11,
+                            weight=fw("title"),
+                            color="#000000" if is_act else "#85FFFFFF",
+                        ),
+                    ],
+                ),
+            )
+
+        bottom_dock = ios26_glass(
+            padding=6,
+            radius=26,
+            content=ft.Row(
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                controls=[
+                    dock_btn("workouts", ft.Icons.FITNESS_CENTER_ROUNDED, "ТРЕНИРОВКИ"),
+                    dock_btn("catalog", ft.Icons.GRID_VIEW_ROUNDED, "КАТАЛОГ"),
+                    dock_btn("settings", ft.Icons.TUNE_ROUNDED, "НАСТРОЙКИ"),
                 ],
             ),
         )
@@ -1294,6 +1733,6 @@ def main(page: ft.Page):
 
 
 if hasattr(ft, "run"):
-    ft.run(main)
+    ft.run(main, assets_dir="assets")
 else:
-    ft.app(target=main)
+    ft.app(target=main, assets_dir="assets")
