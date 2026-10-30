@@ -2,7 +2,7 @@ name: Build Flet APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
@@ -10,32 +10,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Java 17 (Required for Android Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
       - name: Install Flet and dependencies
         run: |
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install "flet[all]"
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Prepare icon in assets folder
+        run: |
+          mkdir -p assets
+          if [ -f oled.jpg ] && [ ! -f assets/icon.png ]; then
+            cp oled.jpg assets/icon.png
+          fi
+
       - name: Build APK with Flet
         run: |
-          flet build apk --yes --verbose
+          flet build apk --yes -v
 
-      - name: Upload APK to Artifacts
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-release-apk
+          name: OLED-GYM-APK
           path: build/apk/*.apk
